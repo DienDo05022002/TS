@@ -11,3 +11,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.Chip-movies {
+  font-size: x-small;
+  padding: 10 40px;
+}
