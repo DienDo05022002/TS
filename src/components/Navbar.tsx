@@ -15,14 +15,21 @@ import { SelectChangeEvent } from '@mui/material/Select';
 import WelcomeMessage from './WelcomeMessage';
 import { ProgressContext } from '../context/ProgressProvider';
 import { ThemeContext } from '../context/ThemeProvider';
+import Login from './Login';
+import { AuthContext } from '../context/AuthContext';
 
 const Navbar = () => {
   //Context
   const { lastTime, status } = useContext(ProgressContext);
   const { theme } = useContext(ThemeContext);
+  const {
+    authInfo: { isAuthenticated },
+    toggleAuth,
+  } = useContext(AuthContext);
   // console.log({theme})
   const [position, setPosition] = useState<string>('Full-stack');
   const [time, setTime] = useState(() => new Date());
+  const [loginOpen, setloginOpen] = useState(false);
   // console.log(time);
 
   useEffect(() => {
@@ -35,7 +42,7 @@ const Navbar = () => {
   // console.log(position);
 
   return (
-    <AppBar position="static" >
+    <AppBar position="static">
       <Toolbar>
         <IconButton
           size="large"
@@ -66,6 +73,15 @@ const Navbar = () => {
           <Box my={1}>
             <Typography variant="h6">{time.toUTCString()}</Typography>
           </Box>
+          <Button
+            variant="contained"
+            onClick={isAuthenticated ? toggleAuth.bind(this, '') : setloginOpen.bind(this, true)}
+            style={{ background: 'white', color: 'black' }}
+          >
+            {isAuthenticated ? 'Logout' : 'Login'}
+          </Button>
+
+          <Login isOpen={loginOpen} handleClose={setloginOpen} />
         </Box>
       </Toolbar>
     </AppBar>
