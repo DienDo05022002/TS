@@ -7,6 +7,8 @@ import ThemeProvider from './context/ThemeProvider';
 import MovieProvider from './context/MovieProvider';
 import Movie from './components/Movie';
 import AuthContextProvider from './context/AuthContext'
+import { Grid } from '@mui/material';
+import TopMovie from './components/TopMovie';
 
 function App() {
   return (
@@ -16,7 +18,14 @@ function App() {
           <ThemeProvider>
             <ProgressProvider>
               <Navbar />
-              <Movie />
+              <Grid container>
+                <Grid item xs={4}>
+                  <TopMovie/>
+                </Grid>
+                <Grid item xs={4}>
+                  <Movie/>
+                </Grid>
+              </Grid>
             </ProgressProvider>
           </ThemeProvider>
         </MovieProvider>
